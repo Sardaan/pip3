@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="pip3">
+    <output-path>$PROJECT_DIR$/out/artifacts/pip3</output-path>
+    <root id="archive" name="pip3.war">
+      <element id="artifact" artifact-name="web3" />
+    </root>
+  </artifact>
+</component>

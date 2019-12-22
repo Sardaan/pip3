@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<!--        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"-->
+<!--        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>PIP2</title>
+    <h:outputStylesheet name="style.css" library="style"/>
+    <h:outputScript name="script.js" library="js"/>
+
+</h:head>
+<h:body onload="draw()">
+
+    <header>
+        <h3>Григорьева Сардана</h3>
+        <h4>200043</h4>
+    </header>
+
+    <div id="graph" style="height: 400px;">
+        <canvas id="shapesCanvas">У вас не поддерживает canvas!</canvas>
+        <canvas id="cartesianSystemCanvas">У вас не поддерживает canvas!</canvas>
+        <canvas id="dotsCanvas">У вас не поддерживает canvas!</canvas>
+    </div>
+
+<!--    x spinner (-5;5) шаг 1-->
+<!--    y inputText (-3;5)-->
+<!--    r selectOneMenu {1; 1,5; 2; 2,5; 3}-->
+
+    <h:form id="form">
+        <table id="formTable">
+            <tr>
+                <td><h:outputLabel value="X" /></td>
+                <td>
+                    <p:spinner id="xValue" value="#{SpinnerView.x}" stepFactor="1" min="-5" max="5"/>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <h:outputLabel value="Y" />
+                </td>
+                <td>
+                    <p:inputText id="yValue" value="#{InputTextView.y}" placeholder="-3 ... 5" maxlength="10"/>
+                    <!--            <span class="ui-float-label">-->
+                    <!--                <p:inputText id="float-input" value="#{InputTextView.y}"/>-->
+                    <!--                <p:outputLabel for="@previous" value="Username" />-->
+                    <!--            </span>-->
+                    <!--            -->
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p:outputLabel value="R" />
+                </td>
+                <td>
+                    <p:selectOneMenu id="rValue" value="#{selectOneMenuView.r}" >
+                        <f:selectItem itemLabel="1" itemValue="1" />
+                        <f:selectItem itemLabel="1.5" itemValue="1.5" />
+                        <f:selectItem itemLabel="2" itemValue="2" />
+                        <f:selectItem itemLabel="2.5" itemValue="2.5" />
+                        <f:selectItem itemLabel="3" itemValue="3" />
+                    </p:selectOneMenu>
+                </td>
+            </tr>
+        </table>
+
+
+        <p:growl id="growl" life="2000" />
+        <p:commandButton value="Send" update="growl" action="#{ButtonView.buttonAction}"/>
+
+
+    </h:form>
+    <h:form id="canvasForm">
+        <h:inputHidden id="fromCanvas" value="#{Bean.fromCanvas}"></h:inputHidden>
+        <h:inputHidden id="xHidden" value="#{Bean.x}"></h:inputHidden>
+        <h:inputHidden id="yHidden" value="#{Bean.y}"></h:inputHidden>
+        <h:inputHidden id="rHidden" value="#{Bean.r}"></h:inputHidden>
+
+        <h:commandButton action="#{Bean.addToList()}" value="Отправить" id="submitButton1" style="display: none"/>
+    </h:form>
+
+    <div id="table">
+
+    </div>
+
+    <h:form>
+        <h:commandLink value="К начальной странице" action="index"></h:commandLink>
+    </h:form>
+</h:body>
+
+<!--<f:view>-->
+<!--    <h:outputLabel value="Hello, world"/>-->
+<!--</f:view>-->
+</html>
