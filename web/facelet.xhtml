@@ -39,7 +39,7 @@
             <tr>
                 <td><h:outputLabel value="X" /></td>
                 <td>
-                    <p:spinner id="xValue" value="#{SpinnerView.x}" stepFactor="1" min="-5" max="5"/>
+                    <p:spinner id="xValue" value="#{formData.x}" stepFactor="1" min="-5" max="5"/>
                 </td>
 
             </tr>
@@ -48,7 +48,7 @@
                     <h:outputLabel value="Y" />
                 </td>
                 <td>
-                    <p:inputText id="yValue" value="#{InputTextView.y}" placeholder="-3 ... 5" maxlength="10"/>
+                    <p:inputText id="yValue" value="#{formData.y}" placeholder="-3 ... 5" maxlength="10"/>
                     <!--            <span class="ui-float-label">-->
                     <!--                <p:inputText id="float-input" value="#{InputTextView.y}"/>-->
                     <!--                <p:outputLabel for="@previous" value="Username" />-->
@@ -62,7 +62,7 @@
                     <p:outputLabel value="R" />
                 </td>
                 <td>
-                    <p:selectOneMenu id="rValue" value="#{selectOneMenuView.r}" >
+                    <p:selectOneMenu id="rValue" value="#{formData.r}" >
                         <f:selectItem itemLabel="1" itemValue="1" />
                         <f:selectItem itemLabel="1.5" itemValue="1.5" />
                         <f:selectItem itemLabel="2" itemValue="2" />
@@ -75,7 +75,7 @@
 
 
         <p:growl id="growl" life="2000" />
-        <p:commandButton value="Send" update="growl" action="#{ButtonView.buttonAction}"/>
+        <p:commandButton value="Send" update="growl" action="#{formData.buttonAction}"/>
 
 
     </h:form>
