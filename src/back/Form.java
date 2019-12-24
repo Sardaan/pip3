@@ -1,17 +1,20 @@
 package back;
 
-
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
+@ManagedBean(name = "formData")
+@ApplicationScoped
 public class Form implements Serializable {
    private double x;
    private double y;
-   private int r;
+   private double r;
    private boolean hit;
 
-   public Form(double x, double y, int r, boolean hit){
+   public Form(double x, double y, double r, boolean hit){
        this.x = x;
        this.y = y;
        this.r = r;
@@ -26,24 +29,24 @@ public class Form implements Serializable {
        return false;
    }
 
-   public Double getX() {
+   public double getX() {
         return x;
    }
-   public void setX(Double x) {
+   public void setX(double x) {
         this.x = x;
     }
 
-   public Double getY() {
+   public double getY() {
         return y;
    }
-   public void setY(Double y) {
+   public void setY(double y) {
         this.y = y;
    }
 
-   public Integer getR() {
+   public double getR() {
         return r;
    }
-   public void setR(Integer r) {
+   public void setR(double r) {
         this.r = r;
    }
 
@@ -54,4 +57,12 @@ public class Form implements Serializable {
         this.hit = hit;
     }
 
+    public void updateData() throws SQLException {
+        PreparedStatement preparedStatement = Bean.getConnection().prepareStatement("INSERT INTO form values(?, ?, ?, ?)");
+        preparedStatement.setDouble(1, x);
+        preparedStatement.setDouble(2, y);
+        preparedStatement.setDouble(3, r);
+        preparedStatement.setBoolean(4, hit);
+        preparedStatement.execute();
+    }
 }

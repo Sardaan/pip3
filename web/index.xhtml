@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<!--        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"-->
+<!--        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -11,16 +11,31 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>PIP2</title>
+    <title>PIP3</title>
     <h:outputScript name="script.js" library="js"/>
     <h:outputStylesheet name="style.css" library="style"/>
 </h:head>
 <h:body>
-<!--    header-->
+    <header>
+        <h3>Григорьева Сардана и Мхитарян Сергей</h3>
+        <h4>Группа P3200</h4>
+        <h4>200043</h4>
+    </header>
     <div id="currentTime"> time</div>
+    <script>
+        function showTime(){
+            let currentTime = new Date();
+            document.getElementById("currentTime").innerHTML = "Текущее время: "
+                + currentTime.getHours()
+                + ":" + currentTime.getMinutes()
+                + ":" + currentTime.getSeconds();
+        }
+        setInterval(showTime, 13000);
+        window.onload = showTime;
+    </script>
 
     <h:form>
-        <h:commandLink value="К начальной странице" action="facelet"></h:commandLink>
+        <h:commandLink value="Перейти к главной странице" action="facelet"></h:commandLink>
     </h:form>
 
 </h:body>

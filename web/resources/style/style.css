@@ -27,21 +27,17 @@ header {
 
 #graph{
     text-align: center;
-    margin: 5px auto;
 }
 canvas {
     width: 400px;
     height: 400px;
     border: 1px solid white;
-    position: absolute;
-    z-index: auto;
 }
 canvas:hover{
     cursor: crosshair;
 }
 
 #formTable {
-    width: 100%;
     text-align: center;
     border-collapse: collapse;
     border-spacing: 5px;

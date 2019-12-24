@@ -14,20 +14,18 @@
 <h:head>
     <title>PIP2</title>
     <h:outputStylesheet name="style.css" library="style"/>
-    <h:outputScript name="script.js" library="js"/>
-
 </h:head>
 <h:body onload="draw()">
 
     <header>
-        <h3>Григорьева Сардана</h3>
+        <h3>Григорьева Сардана и Мхитарян Сергей</h3>
+        <h4>Группа P3200</h4>
         <h4>200043</h4>
     </header>
 
     <div id="graph" style="height: 400px;">
         <canvas id="shapesCanvas">У вас не поддерживает canvas!</canvas>
-        <canvas id="cartesianSystemCanvas">У вас не поддерживает canvas!</canvas>
-        <canvas id="dotsCanvas">У вас не поддерживает canvas!</canvas>
+
     </div>
 
 <!--    x spinner (-5;5) шаг 1-->
@@ -41,6 +39,7 @@
                 <td>
                     <p:spinner id="xValue" value="#{formData.x}" stepFactor="1" min="-5" max="5"/>
                 </td>
+                <td><p id="xErrorLine"></p></td>
 
             </tr>
             <tr>
@@ -56,6 +55,8 @@
                     <!--            -->
 
                 </td>
+                <td><p id="yErrorLine"></p></td>
+
             </tr>
             <tr>
                 <td>
@@ -70,31 +71,35 @@
                         <f:selectItem itemLabel="3" itemValue="3" />
                     </p:selectOneMenu>
                 </td>
+                <td><p id="rErrorLine"></p></td>
+
             </tr>
         </table>
 
 
         <p:growl id="growl" life="2000" />
-        <p:commandButton value="Send" update="growl" action="#{formData.buttonAction}"/>
+        <p:commandButton id="submitButton" value="Send" action="#{formData.updateData()}"/>
 
 
     </h:form>
     <h:form id="canvasForm">
-        <h:inputHidden id="fromCanvas" value="#{Bean.fromCanvas}"></h:inputHidden>
-        <h:inputHidden id="xHidden" value="#{Bean.x}"></h:inputHidden>
-        <h:inputHidden id="yHidden" value="#{Bean.y}"></h:inputHidden>
-        <h:inputHidden id="rHidden" value="#{Bean.r}"></h:inputHidden>
 
-        <h:commandButton action="#{Bean.addToList()}" value="Отправить" id="submitButton1" style="display: none"/>
+        <h:inputHidden id="xHidden" value="#{formData.x}"></h:inputHidden>
+        <h:inputHidden id="yHidden" value="#{formData.y}"></h:inputHidden>
+        <h:inputHidden id="rHidden" value="#{formData.r}"></h:inputHidden>
+        <h:commandButton action="#{formData.updateData()}" value="Send" id="submitButton1" style="display: none"/>
     </h:form>
 
-    <div id="table">
-
+    <div id="tableData">
+        <c:forEach var="dot" items="#{bean.history}">
+            <div data-x="#{formData.x}" data-y="#{formData.y}" data-r="#{formData.r}"></div>
+        </c:forEach>
     </div>
 
     <h:form>
         <h:commandLink value="К начальной странице" action="index"></h:commandLink>
     </h:form>
+    <h:outputScript name="script.js" library="js"/>
 </h:body>
 
 <!--<f:view>-->
