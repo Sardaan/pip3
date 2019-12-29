@@ -14,13 +14,12 @@ import java.util.List;
 @ApplicationScoped
 public class Bean implements Serializable {
 
-    private String buttonAction;
     private List<Form> history;
 
-    public List<Form> getHistory() {
+    public List<Form> getFormData() {
         return history;
     }
-    public void setHistory(List<Form> history) {
+    public void setFormData(List<Form> history) {
         this.history = history;
     }
 
@@ -38,7 +37,7 @@ public class Bean implements Serializable {
         return connection;
     }
 
-    public void getDataFromDB() throws SQLException{
+    public List<Form> getDataFromDB() throws SQLException{
         PreparedStatement preparedStatement = getConnection().prepareStatement("SELECT * FROM form");
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Form> data = new ArrayList<>();
@@ -49,19 +48,7 @@ public class Bean implements Serializable {
             boolean hit = resultSet.getBoolean("hit");
             data.add(new Form(x, y, r, hit));
         }
-        setHistory(data);
+        setFormData(data);
+        return data;
     }
-
-//    public void updateData() throws SQLException{
-//        PreparedStatement preparedStatement = getConnection().prepareStatement("INSERT INTO form values(?, ?, ?, ?)");
-//        double x = form.getX();
-//        double y = form.getY();
-//        double r = form.getR();
-//        boolean hit = form.isHit();
-//        preparedStatement.setDouble(1, x);
-//        preparedStatement.setDouble(2, y);
-//        preparedStatement.setDouble(3, r);
-//        preparedStatement.setBoolean(4, hit);
-//        preparedStatement.execute();
-//    }
 }

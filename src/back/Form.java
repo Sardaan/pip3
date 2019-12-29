@@ -22,14 +22,22 @@ public class Form implements Serializable {
    }
    public Form(){}
 
-   public static boolean check(double x, double y, int r){
-       if(x>=0 && y>=0 && x<=r && y<=r/2) return true;
-       if(x<=0 && y>=0 && r*r<=x*x+y*y) return true;
-       if(x<=0 && y<=0 && y>=-x-r/2) return true;
-       return false;
+   public static boolean validateX(double x){
+       return x > -5 && x < 5;
    }
-
-   public double getX() {
+    public static boolean validateY(double y){
+        return y > -3 && y < 5;
+    }
+    public static boolean validateR(double r){
+        return r==1 || r==1.5 || r==2 || r==2.5 || r==3;
+    }
+    public static boolean checkArea(double x, double y, double r){
+        if(x>=0 && y>=0 && x<=r && y<=r/2) return true;
+        if(x<=0 && y>=0 && r*r<=x*x+y*y) return true;
+        if(x<=0 && y<=0 && y>=-x-r/2) return true;
+        return false;
+    }
+    public double getX() {
         return x;
    }
    public void setX(double x) {
@@ -58,6 +66,9 @@ public class Form implements Serializable {
     }
 
     public void updateData() throws SQLException {
+       if(checkArea(x, y, r)){
+           hit = true;
+       }else hit = false;
         PreparedStatement preparedStatement = Bean.getConnection().prepareStatement("INSERT INTO form values(?, ?, ?, ?)");
         preparedStatement.setDouble(1, x);
         preparedStatement.setDouble(2, y);
