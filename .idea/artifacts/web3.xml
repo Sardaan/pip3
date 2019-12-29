@@ -8,8 +8,9 @@
           <element id="module-output" name="pip3" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="javax.faces-2.4.0" />
-          <element id="library" level="project" name="primefaces-7.0" />
+          <element id="library" level="project" name="javax.faces:jsf-api:2.1" />
+          <element id="library" level="project" name="org.primefaces:primefaces:7.0" />
+          <element id="library" level="project" name="javax.enterprise:cdi-api:2.0" />
         </element>
       </element>
     </root>

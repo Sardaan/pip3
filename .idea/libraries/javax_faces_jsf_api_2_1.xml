@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="javax.faces:jsf-api:2.1" type="repository">
+    <properties maven-id="javax.faces:jsf-api:2.1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/faces/jsf-api/2.1/jsf-api-2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

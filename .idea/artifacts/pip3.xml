@@ -3,6 +3,13 @@
     <output-path>$PROJECT_DIR$/out/artifacts/pip3</output-path>
     <root id="archive" name="pip3.war">
       <element id="artifact" artifact-name="web3" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="javax.faces:jsf-api:2.1" />
+          <element id="library" level="project" name="org.primefaces:primefaces:7.0" />
+          <element id="library" level="project" name="javax.enterprise:cdi-api:2.0" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>
