@@ -7,7 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 //todo отправление формы при нажатии на канвас и при нажатии на сабмит
 
 @ManagedBean(name = "bean")
@@ -15,11 +14,10 @@ import java.util.List;
 public class Bean implements Serializable {
 
     private List<Form> history;
-
-    public List<Form> getFormData() {
+    public List<Form> getHistory() {
         return history;
     }
-    public void setFormData(List<Form> history) {
+    public void setHistory(List<Form> history) {
         this.history = history;
     }
 
@@ -48,7 +46,7 @@ public class Bean implements Serializable {
             boolean hit = resultSet.getBoolean("hit");
             data.add(new Form(x, y, r, hit));
         }
-        setFormData(data);
+        setHistory(data);
         return data;
     }
 }
