@@ -24,8 +24,8 @@ public class Bean implements Serializable {
     static Connection connection;
     public static Connection getConnection() {
         String url = "jdbc:postgresql://localhost:5432/pip3";
-        String user = "s264424";
-        String password = "shu145";
+        String user = "user";
+        String password = "password";
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, user, password);
