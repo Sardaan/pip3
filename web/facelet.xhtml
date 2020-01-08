@@ -17,82 +17,99 @@
 <h:body>
     <header>
         <h3>Григорьева Сардана и Мхитарян Сергей</h3>
-        <h4>Группа P3200</h4>
-        <h4>200043</h4>
+        <p>Группа P3200<br/>Вариант 200043</p>
     </header>
 
-    <div id="graph" style="height: 400px;">
-        <canvas id="shapesCanvas">У вас не поддерживает canvas!</canvas>
-        <h:outputScript name="script.js" library="js"/>
+    <div id="flexWrap">
+        <div>
+            <div id="graph" style="height: 400px;">
+                <canvas id="shapesCanvas">У вас не поддерживает canvas!</canvas>
+                <h:outputScript name="script.js" library="js"/>
+            </div>
+
+            <!--    x spinner (-5;5) шаг 1-->
+            <!--    y inputText (-3;5)-->
+            <!--    r selectOneMenu {1; 1,5; 2; 2,5; 3}-->
+
+            <h:form id="form">
+                <table id="formTable">
+                    <tr>
+                        <td><h:outputLabel value="X" /></td>
+                        <td>
+                            <p:spinner id="xValue" value="#{formData.x}" stepFactor="1" min="-5" max="5"/>
+                        </td>
+                        <td><p id="xErrorLine"> </p></td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Y" />
+                        </td>
+                        <td>
+                            <p:inputText id="yValue" value="#{formData.y}" placeholder="-3 ... 5" maxlength="10"/>
+                            <!--            <span class="ui-float-label">-->
+                            <!--                <p:inputText id="float-input" value="#{InputTextView.y}"/>-->
+                            <!--                <p:outputLabel for="@previous" value="Username" />-->
+                            <!--            </span>-->
+                            <!--            -->
+
+                        </td>
+                        <td><p id="yErrorLine"> </p></td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="R" />
+                        </td>
+                        <td>
+                            <p:selectOneMenu id="rValue" value="#{formData.r}" onchange="c.clearRect(0,0,width,height);drawFigures(this.value);">
+                                <f:selectItem itemLabel="1" itemValue="1" />
+                                <f:selectItem itemLabel="1.5" itemValue="1.5" />
+                                <f:selectItem itemLabel="2" itemValue="2" />
+                                <f:selectItem itemLabel="2.5" itemValue="2.5" />
+                                <f:selectItem itemLabel="3" itemValue="3" />
+                            </p:selectOneMenu>
+                        </td>
+                        <td><p id="rErrorLine"> </p></td>
+
+                    </tr>
+                </table>
+
+
+                <p:growl id="growl" life="2000" />
+                <p:commandButton id="submitButton" value="Send" action="#{formData.updateData()}"/>
+
+            </h:form>
+        </div>
+        <div>
+            <table id="dataTable">
+                <tr>
+                    <th>x</th>
+                    <th>y</th>
+                    <th>r</th>
+                    <th>hit</th>
+                </tr>
+                <c:forEach var="dot" items="#{bean.getDataFromDB()}">
+                    <tr>
+                        <td>#{dot.x}</td>
+                        <td>#{dot.y}</td>
+                        <td>#{dot.r}</td>
+                        <td>#{dot.hit}</td>
+                    </tr>
+
+                    <!--            <div data-x="#{dot.x}" data-y="#{dot.y}" data-r="#{dot.r}" data-hit="#{dot.hit}"></div>-->
+                </c:forEach>
+            </table>
+        </div>
     </div>
 
-<!--    x spinner (-5;5) шаг 1-->
-<!--    y inputText (-3;5)-->
-<!--    r selectOneMenu {1; 1,5; 2; 2,5; 3}-->
-
-    <h:form id="form">
-        <table id="formTable">
-            <tr>
-                <td><h:outputLabel value="X" /></td>
-                <td>
-                    <p:spinner id="xValue" value="#{formData.x}" stepFactor="1" min="-5" max="5"/>
-                </td>
-                <td><p id="xErrorLine"> </p></td>
-
-            </tr>
-            <tr>
-                <td>
-                    <h:outputLabel value="Y" />
-                </td>
-                <td>
-                    <p:inputText id="yValue" value="#{formData.y}" placeholder="-3 ... 5" maxlength="10"/>
-                    <!--            <span class="ui-float-label">-->
-                    <!--                <p:inputText id="float-input" value="#{InputTextView.y}"/>-->
-                    <!--                <p:outputLabel for="@previous" value="Username" />-->
-                    <!--            </span>-->
-                    <!--            -->
-
-                </td>
-                <td><p id="yErrorLine"> </p></td>
-
-            </tr>
-            <tr>
-                <td>
-                    <p:outputLabel value="R" />
-                </td>
-                <td>
-                    <p:selectOneMenu id="rValue" value="#{formData.r}" onchange="c.clearRect(0,0,width,height);drawFigures(this.value);">
-                        <f:selectItem itemLabel="1" itemValue="1" />
-                        <f:selectItem itemLabel="1.5" itemValue="1.5" />
-                        <f:selectItem itemLabel="2" itemValue="2" />
-                        <f:selectItem itemLabel="2.5" itemValue="2.5" />
-                        <f:selectItem itemLabel="3" itemValue="3" />
-                    </p:selectOneMenu>
-                </td>
-                <td><p id="rErrorLine"> </p></td>
-
-            </tr>
-        </table>
-
-
-        <p:growl id="growl" life="2000" />
-        <p:commandButton id="submitButton" value="Send" action="#{formData.updateData()}"/>
-
-
-    </h:form>
     <h:form id="canvasForm">
 
         <h:inputHidden id="xHidden" value="#{formData.x}"> </h:inputHidden>
         <h:inputHidden id="yHidden" value="#{formData.y}"> </h:inputHidden>
         <h:inputHidden id="rHidden" value="#{formData.r}"> </h:inputHidden>
-        <h:commandButton action="#{formData.updateData()}" value="Send" id="submitButton1" style="display: none"/>
+        <h:commandButton action="#{formData.updateData()}" value="Send" id="submitButtonHidden" style="display: none"/>
     </h:form>
-
-    <div id="tableData">
-        <c:forEach var="dot" items="#{bean.history}">
-            <div data-x="#{formData.x}" data-y="#{formData.y}" data-r="#{formData.r}"></div>
-        </c:forEach>
-    </div>
 
     <h:form>
         <h:commandLink value="К начальной странице" action="index"> </h:commandLink>

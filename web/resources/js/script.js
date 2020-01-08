@@ -100,17 +100,17 @@ function drawDot(x, y, hit) {
 
 }
 
-function drawAllDots() {
-    let dots = document.getElementById("tableData").querySelectorAll("*");
-    for (let i = 0; i < dots.length; i++) {
-        c.fillStyle = dots[i].getAttribute("isHit") ? "#009900" : "#990000";
-        c.beginPath();
-        c.arc(dots[i].getAttribute("xValue"),
-            dots[i].getAttribute("yValue"),
-            1.5, 0, Math.PI * 2);
-        c.fill();
-    }
-}
+// function drawAllDots() {
+//     let dots = document.getElementById("dataTable").querySelectorAll("*");
+//     for (let i = 0; i < dots.length; i++) {
+//         c.fillStyle = dots[i].getAttribute("isHit") ? "#009900" : "#990000";
+//         c.beginPath();
+//         c.arc(dots[i].getAttribute("xValue"),
+//             dots[i].getAttribute("yValue"),
+//             1.5, 0, Math.PI * 2);
+//         c.fill();
+//     }
+// }
 canvas.addEventListener("mousedown", function (event) {
     let click_x, click_y;
     let r = document.getElementById("rValue");
@@ -119,7 +119,7 @@ canvas.addEventListener("mousedown", function (event) {
     click_y = event.clientY - rect.top;
     let x = (click_x - 200) / 160 * r;
     let y = (-click_y + 200) / 160 * r;
-    drawDot(click_x, click_y,);
+    drawDot(click_x, click_y, checkArea(x.toFixed(3), y.toFixed(3), r));
     sendCanvas(x.toFixed(3), y.toFixed(3), r);
 });
 
@@ -127,7 +127,12 @@ function sendCanvas(x, y) {
     document.getElementById("xHidden").value = x;
     document.getElementById("yHidden").value = y;
     document.getElementById("rRidden").value = r;
-    let button = document.getElementById("submitButton1");
+    let button = document.getElementById("submitButtonHidden");
     button.click();
 }
-
+function checkArea(xVal, yVal, rVal) {
+    if(xVal>=0 && yVal>=0 && xVal<=rVal && yVal<=rVal/2) return true;
+    if(xVal<=0 && yVal>=0 && rVal*rVal <= xVal*xVal+yVal*yVal) return true;
+    if(xVal<=0 && yVal<=0 && yVal>=-xVal-rVal/2) return true;
+    return false;
+}

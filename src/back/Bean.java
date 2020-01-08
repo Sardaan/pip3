@@ -7,7 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//todo отправление формы при нажатии на канвас и при нажатии на сабмит
 
 @ManagedBean(name = "bean")
 @ApplicationScoped
@@ -23,13 +22,15 @@ public class Bean implements Serializable {
 
     static Connection connection;
     public static Connection getConnection() {
-        String url = "jdbc:postgresql://localhost:5432/pip3";
-        String user = "s264424";
-        String password = "shu145";
+        String url = "jdbc:postgresql://localhost:5432/studs";
+        String user = "Sardaann";
+        String password = "Sardaann";
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Драйвер загружен");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "зщыепкуы");
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Cannot connect to database!");
         }
         return connection;

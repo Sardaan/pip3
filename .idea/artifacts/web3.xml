@@ -1,18 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="web3">
-    <output-path>$PROJECT_DIR$/out/artifacts/web3.war</output-path>
-    <root id="root">
-      <element id="javaee-facet-resources" facet="pip3/web/Web" />
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="classes">
-          <element id="module-output" name="pip3" />
-        </element>
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="javax.faces:jsf-api:2.1" />
-          <element id="library" level="project" name="org.primefaces:primefaces:7.0" />
-          <element id="library" level="project" name="javax.enterprise:cdi-api:2.0" />
-        </element>
-      </element>
+  <artifact type="war" name="web3">
+    <output-path>$PROJECT_DIR$/out/artifacts/web3</output-path>
+    <root id="archive" name="web3.war">
+      <element id="artifact" artifact-name="pip3:war exploded" />
     </root>
   </artifact>
 </component>

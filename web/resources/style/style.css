@@ -1,9 +1,8 @@
 html {
     height: 100%;
     background: #6D7993;
-    display: flex;
     font-family: "Montserrat", Helvetica, sans-serif;
-    font-size: 22px;
+    font-size: 18px;
     justify-content: center;
 
 }
@@ -18,14 +17,18 @@ body{
 header {
     color: white;
     padding: 1px;
-    font-size: large;
     margin: 0;
     border-bottom: 3px solid white;
     text-align: center;
 
 }
+#flexWrap{
+    display: flex;
+    flex-direction: row;
+}
 
 #graph{
+    padding: 10px;
     text-align: center;
 }
 canvas {
@@ -38,20 +41,20 @@ canvas:hover{
 }
 
 #formTable {
-    text-align: center;
+    padding: 10px;
     border-collapse: collapse;
     border-spacing: 5px;
     border-radius: 20px;
 }
-table th {
+#dataTable th {
     padding: 12px 10px;
     border-bottom: 2px solid white;
     color: lavender;
 }
-td {
+#dataTable td {
     padding: 10px;
     color: white;
 }
-td:nth-child(4n){
+#dataTable td:nth-child(4n){
     color: lavender;
 }
