@@ -21,14 +21,19 @@ public class Bean implements Serializable {
         this.history = history;
     }
 
-    static Connection connection;
-    public static Connection getConnection() {
+    static Connection connection = connect();
+    public static Connection getConnection(){
+        return connection;
+    }
+    public static Connection connect() {
         String url = "jdbc:postgresql://localhost:5432/pip3";
         String user = "user";
         String password = "password";
         try {
             Class.forName("org.postgresql.Driver");
+            System.out.println("Драйвер загружен");
             connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Connected to the database");
         } catch (Exception e) {
             System.out.println("Cannot connect to database!");
         }

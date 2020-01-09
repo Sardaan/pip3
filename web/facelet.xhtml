@@ -22,7 +22,7 @@
 
     <div id="flexWrap">
         <div>
-            <div id="graph" style="height: 400px;">
+            <div id="graph" style="height: 400px; width: 400px">
                 <canvas id="shapesCanvas">У вас не поддерживает canvas!</canvas>
                 <h:outputScript name="script.js" library="js"/>
             </div>
@@ -62,7 +62,7 @@
                             <p:outputLabel value="R" />
                         </td>
                         <td>
-                            <p:selectOneMenu id="rValue" value="#{formData.r}" onchange="c.clearRect(0,0,width,height);drawFigures(this.value);">
+                            <p:selectOneMenu id="rValue" widgetVar="rSelect" value="#{formData.r}" onchange="c.clearRect(0,0,width,height);drawFigures(this.value);drawAllDots(this.value);">
                                 <f:selectItem itemLabel="1" itemValue="1" />
                                 <f:selectItem itemLabel="1.5" itemValue="1.5" />
                                 <f:selectItem itemLabel="2" itemValue="2" />
@@ -96,26 +96,32 @@
                         <td>#{dot.r}</td>
                         <td>#{dot.hit}</td>
                     </tr>
-
-                    <!--            <div data-x="#{dot.x}" data-y="#{dot.y}" data-r="#{dot.r}" data-hit="#{dot.hit}"></div>-->
                 </c:forEach>
             </table>
+        </div>
+        <div id="data">
+            <c:forEach var="dot" items="#{bean.getDataFromDB()}">
+                <div data-x="#{dot.x}" data-y="#{dot.y}" data-r="#{dot.r}"></div>
+            </c:forEach>
         </div>
     </div>
 
     <h:form id="canvasForm">
 
-        <h:inputHidden id="xHidden" value="#{formData.x}"> </h:inputHidden>
-        <h:inputHidden id="yHidden" value="#{formData.y}"> </h:inputHidden>
+        <h:inputHidden id="xHidden" value="#{formData.hiddenX}"> </h:inputHidden>
+        <h:inputHidden id="yHidden" value="#{formData.hiddenY}"> </h:inputHidden>
         <h:inputHidden id="rHidden" value="#{formData.r}"> </h:inputHidden>
-        <h:commandButton action="#{formData.updateData()}" value="Send" id="submitButtonHidden" style="display: none"/>
+        <h:commandButton action="#{formData.updateDataHidden()}" value="Send" id="submitButtonHidden" style="display: none"/>
     </h:form>
 
     <h:form>
         <h:commandLink value="К начальной странице" action="index"> </h:commandLink>
     </h:form>
+
     <script>
-        window.onload = c.clearRect(0,0,400,400);drawFigures(1);
+        window.onload = c.clearRect(0,0,400,400);
+        drawFigures(1);
+        drawAllDots(1);
     </script>
 </h:body>
 

@@ -9,7 +9,7 @@ canvas.height = 400;
 //let radius = 160;
 let width = 400;
 let height = 400;
-let stockRadius = 100;
+let stockRadius = 60;
 c.strokeStyle = "#FFFFFF";
 
 function drawGraph(radius) {
@@ -19,10 +19,10 @@ function drawGraph(radius) {
     c.lineTo(width-5, height/2);
     c.moveTo(width/2-stockRadius, height/2-3);
     c.lineTo(width/2-stockRadius, height/2+3);
-    c.moveTo(width/2-stockRadius/2, height/2-3);
-    c.lineTo(width/2-stockRadius/2, height/2+3);
-    c.moveTo(width/2+stockRadius/2, height/2-3);
-    c.lineTo(width/2+stockRadius/2, height/2+3);
+    c.moveTo(width/2-stockRadius*2, height/2-3);
+    c.lineTo(width/2-stockRadius*2, height/2+3);
+    c.moveTo(width/2+stockRadius*2, height/2-3);
+    c.lineTo(width/2+stockRadius*2, height/2+3);
     c.moveTo(width/2+stockRadius, height/2-3);
     c.lineTo(width/2+stockRadius, height/2+3);
     c.moveTo(width-10, height/2-5);
@@ -38,10 +38,10 @@ function drawGraph(radius) {
     c.lineTo(width/2, height-5);
     c.moveTo(width/2-3, height/2-stockRadius);
     c.lineTo(width/2+3, height/2-stockRadius);
-    c.moveTo(width/2-3, height/2-stockRadius/2);
-    c.lineTo(width/2+3, height/2-stockRadius/2);
-    c.moveTo(width/2-3, height/2+stockRadius/2);
-    c.lineTo(width/2+3, height/2+stockRadius/2);
+    c.moveTo(width/2-3, height/2-stockRadius*2);
+    c.lineTo(width/2+3, height/2-stockRadius*2);
+    c.moveTo(width/2-3, height/2+stockRadius*2);
+    c.lineTo(width/2+3, height/2+stockRadius*2);
     c.moveTo(width/2-3, height/2+stockRadius);
     c.lineTo(width/2+3, height/2+stockRadius);
     c.moveTo(width/2-5, 10);
@@ -54,15 +54,15 @@ function drawGraph(radius) {
     c.font = "14px Arial";
     c.fillStyle = "#FFFFFF";
     c.fillText("X", width-13, height/2 -5);
-    c.fillText('1/2', width/2 + stockRadius/2, height/2-5);
+    c.fillText('2', width/2 + stockRadius*2, height/2-5);
     c.fillText('1', width/2 + stockRadius, height/2-5);
     c.fillText('-1', width/2 - stockRadius, height/2-5);
-    c.fillText('-1/2', width/2 - stockRadius/2, height/2-5);
+    c.fillText('-2', width/2 - stockRadius*2, height/2-5);
     c.fillText("Y", width/2+5, 13);
     c.fillText('-1', width/2+5, height/2 + stockRadius);
-    c.fillText('-1/2', width/2+5, height/2 + stockRadius/2);
-    c.fillText('1/2', width/2+5, height/2 - stockRadius/2);
-    c.fillText(radius, width/2+5, height/2 - stockRadius);
+    c.fillText('-2', width/2+5, height/2 + stockRadius*2);
+    c.fillText('2', width/2+5, height/2 - stockRadius*2);
+    c.fillText("1", width/2+5, height/2 - stockRadius);
 
 }
 
@@ -100,39 +100,39 @@ function drawDot(x, y, hit) {
 
 }
 
-// function drawAllDots() {
-//     let dots = document.getElementById("dataTable").querySelectorAll("*");
-//     for (let i = 0; i < dots.length; i++) {
-//         c.fillStyle = dots[i].getAttribute("isHit") ? "#009900" : "#990000";
-//         c.beginPath();
-//         c.arc(dots[i].getAttribute("xValue"),
-//             dots[i].getAttribute("yValue"),
-//             1.5, 0, Math.PI * 2);
-//         c.fill();
-//     }
-// }
+function drawAllDots(rad){
+    let dots = document.getElementById("data").querySelectorAll("*");
+    for (let i = 0; i < dots.length; i++) {
+        let x = dots[i].getAttribute("data-x");
+        let y = dots[i].getAttribute("data-y");
+        let hit = checkArea(x,y,rad);
+        drawDot(x*stockRadius/rad+200, 200-y*stockRadius/rad, hit);
+    }
+}
+
+//при клике обновляется все страница (мб надо чтобы это был аякс клик?) еще почему то все время последнее значение пересылается в бд значения
 canvas.addEventListener("mousedown", function (event) {
     let click_x, click_y;
-    let r = document.getElementById("rValue");
+    //let r = document.getElementById("form:rValue").value;
+    let r = PF("rSelect").getSelectedValue();
     let rect = canvas.getBoundingClientRect();
     click_x = event.clientX - rect.left;
     click_y = event.clientY - rect.top;
-    let x = (click_x - 200) / 160 * r;
-    let y = (-click_y + 200) / 160 * r;
+    let x = (click_x - 200) / stockRadius * r;
+    let y = (-click_y + 200) / stockRadius * r;
     drawDot(click_x, click_y, checkArea(x.toFixed(3), y.toFixed(3), r));
-    sendCanvas(x.toFixed(3), y.toFixed(3), r);
+
+    document.getElementById("canvasForm:xHidden").value = x.toFixed(3);
+    document.getElementById("canvasForm:yHidden").value = y.toFixed(3);
+    document.getElementById("canvasForm:rHidden").value = r;
+    let button = document.getElementById("canvasForm:submitButtonHidden");
+    button.click();
 });
 
-function sendCanvas(x, y) {
-    document.getElementById("xHidden").value = x;
-    document.getElementById("yHidden").value = y;
-    document.getElementById("rRidden").value = r;
-    let button = document.getElementById("submitButtonHidden");
-    button.click();
-}
+
 function checkArea(xVal, yVal, rVal) {
     if(xVal>=0 && yVal>=0 && xVal<=rVal && yVal<=rVal/2) return true;
-    if(xVal<=0 && yVal>=0 && rVal*rVal <= xVal*xVal+yVal*yVal) return true;
-    if(xVal<=0 && yVal<=0 && yVal>=-xVal-rVal/2) return true;
+    if(xVal<=0 && yVal>=0 && rVal*rVal >= xVal*xVal+yVal*yVal)return true;
+    if(xVal<=0 && yVal<=0 && yVal >= -xVal-rVal/2) return true;
     return false;
 }

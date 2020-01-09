@@ -11,8 +11,10 @@ import java.sql.SQLException;
 public class Form implements Serializable {
     private double x;
     private double y;
+    private double hiddenX;
+    private double hiddenY;
     private double r;
-    private boolean hit;
+    private boolean hit = checkArea(x, y, r);
 
     public Form(double x, double y, double r, boolean hit){
        this.x = x;
@@ -34,7 +36,7 @@ public class Form implements Serializable {
 
     public static boolean checkArea(double x, double y, double r){
         if(x>=0 && y>=0 && x<=r && y<=r/2) return true;
-        if(x<=0 && y>=0 && r*r<=x*x+y*y) return true;
+        if(x<=0 && y>=0 && r*r>=x*x+y*y) return true;
         if(x<=0 && y<=0 && y>=-x-r/2) return true;
         return false;
     }
@@ -51,6 +53,20 @@ public class Form implements Serializable {
     public void setY(double y) {
         this.y = y;
    }
+
+    public double getHiddenX() {
+        return hiddenX;
+    }
+    public void setHiddenX(double hiddenX) {
+        this.hiddenX = hiddenX;
+    }
+
+    public double getHiddenY() {
+        return hiddenY;
+    }
+    public void setHiddenY(double hiddenY) {
+        this.hiddenY = hiddenY;
+    }
 
     public double getR() {
         return r;
@@ -74,6 +90,18 @@ public class Form implements Serializable {
         PreparedStatement preparedStatement = Bean.getConnection().prepareStatement("INSERT INTO form values(?, ?, ?, ?)");
         preparedStatement.setDouble(1, x);
         preparedStatement.setDouble(2, y);
+        preparedStatement.setDouble(3, r);
+        preparedStatement.setBoolean(4, hit);
+        preparedStatement.executeUpdate();
+    }
+    public void updateDataHidden() throws SQLException {
+        if(checkArea(hiddenX, hiddenY, r)){
+            hit = true;
+        }else hit = false;
+        System.out.println(hiddenX + " " + hiddenY + " " + r);
+        PreparedStatement preparedStatement = Bean.getConnection().prepareStatement("INSERT INTO form values(?, ?, ?, ?)");
+        preparedStatement.setDouble(1, hiddenX);
+        preparedStatement.setDouble(2, hiddenY);
         preparedStatement.setDouble(3, r);
         preparedStatement.setBoolean(4, hit);
         preparedStatement.executeUpdate();
