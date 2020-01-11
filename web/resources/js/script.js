@@ -100,13 +100,14 @@ function drawDot(x, y, hit) {
 
 }
 
-function drawAllDots(rad){
+function drawAllDots(){
     let dots = document.getElementById("data").querySelectorAll("*");
     for (let i = 0; i < dots.length; i++) {
         let x = dots[i].getAttribute("data-x");
         let y = dots[i].getAttribute("data-y");
-        let hit = checkArea(x,y,rad);
-        drawDot(x*stockRadius/rad+200, 200-y*stockRadius/rad, hit);
+        let r = dots[i].getAttribute("data-r");
+        let hit = checkArea(x,y,r);
+        drawDot(x*stockRadius+200, 200-y*stockRadius, hit);
     }
 }
 
@@ -117,8 +118,8 @@ canvas.addEventListener("mousedown", function (event) {
     let rect = canvas.getBoundingClientRect();
     click_x = event.clientX - rect.left;
     click_y = event.clientY - rect.top;
-    let x = (click_x - 200) / stockRadius * r;
-    let y = (-click_y + 200) / stockRadius * r;
+    let x = (click_x - 200) / stockRadius;
+    let y = (-click_y + 200) / stockRadius;
     drawDot(click_x, click_y, checkArea(x.toFixed(3), y.toFixed(3), r));
 
     document.getElementById("canvasForm:xHidden").value = x.toFixed(3);
@@ -136,6 +137,8 @@ function checkArea(xVal, yVal, rVal) {
     return false;
 }
 function drawCanvas(radius) {
+    c.clearRect(0,0,width,height);
+    drawAllDots();
     drawFigures(radius);
-    drawAllDots(radius);
+    drawAllDots(radius)
 }

@@ -36,19 +36,19 @@
                     <tr style="justify-content: center; display: flex">
                         <td style="padding-top: 10px">
                             <h:outputLabel value="X"/>
-                            <p:spinner id="xValue" value="#{formData.x}" stepFactor="1" min="-5" max="5" size="1"/>
+                            <p:spinner id="xValue"  widgetVar="xValue" value="#{formData.x}" stepFactor="1" min="-5" max="5" size="1"/>
                             <p id="xErrorLine"></p>
                         </td>
                         <td style="padding-top: 10px">
                             <h:outputLabel value="Y"/>
-                            <p:inputText id="yValue" value="#{formData.y}" placeholder="-3 ... 5" maxlength="10"
+                            <p:inputText id="yValue" widgetVar="yValue" value="#{formData.y}" placeholder="-3 ... 5" maxlength="10"
                                          size="2"/>
                             <p id="yErrorLine"></p>
                         </td>
                         <td style="padding-top: 10px">
                             <p:outputLabel value="R"/>
                             <p:selectOneMenu id="rValue" widgetVar="rSelect" value="#{formData.r}"
-                                             onchange="c.clearRect(0,0,width,height);drawFigures(this.value);drawAllDots(this.value);">
+                                             onchange="drawCanvas(this.value)">
                                 <f:selectItem itemLabel="1" itemValue="1"/>
                                 <f:selectItem itemLabel="1.5" itemValue="1.5"/>
                                 <f:selectItem itemLabel="2" itemValue="2"/>
@@ -102,7 +102,6 @@
 
     <script>
         drawCanvas(document.getElementById("canvasForm:rHidden").value);
-        console.log(document.getElementById("canvasForm:rHidden").value)
     </script>
 </h:body>
 
