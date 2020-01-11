@@ -33,58 +33,42 @@
 
             <h:form id="form">
                 <table id="formTable">
-                    <tr>
-                        <td><h:outputLabel value="X" /></td>
-                        <td>
-                            <p:spinner id="xValue" value="#{formData.x}" stepFactor="1" min="-5" max="5"/>
+                    <tr style="justify-content: center; display: flex">
+                        <td style="padding-top: 10px">
+                            <h:outputLabel value="X"/>
+                            <p:spinner id="xValue" value="#{formData.x}" stepFactor="1" min="-5" max="5" size="1"/>
+                            <p id="xErrorLine"></p>
                         </td>
-                        <td><p id="xErrorLine"> </p></td>
-
-                    </tr>
-                    <tr>
-                        <td>
-                            <h:outputLabel value="Y" />
+                        <td style="padding-top: 10px">
+                            <h:outputLabel value="Y"/>
+                            <p:inputText id="yValue" value="#{formData.y}" placeholder="-3 ... 5" maxlength="10"
+                                         size="2"/>
+                            <p id="yErrorLine"></p>
                         </td>
-                        <td>
-                            <p:inputText id="yValue" value="#{formData.y}" placeholder="-3 ... 5" maxlength="10"/>
-                            <!--            <span class="ui-float-label">-->
-                            <!--                <p:inputText id="float-input" value="#{InputTextView.y}"/>-->
-                            <!--                <p:outputLabel for="@previous" value="Username" />-->
-                            <!--            </span>-->
-                            <!--            -->
-
-                        </td>
-                        <td><p id="yErrorLine"> </p></td>
-
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:outputLabel value="R" />
-                        </td>
-                        <td>
-                            <p:selectOneMenu id="rValue" widgetVar="rSelect" value="#{formData.r}" onchange="c.clearRect(0,0,width,height);drawFigures(this.value);drawAllDots(this.value);">
-                                <f:selectItem itemLabel="1" itemValue="1" />
-                                <f:selectItem itemLabel="1.5" itemValue="1.5" />
-                                <f:selectItem itemLabel="2" itemValue="2" />
-                                <f:selectItem itemLabel="2.5" itemValue="2.5" />
-                                <f:selectItem itemLabel="3" itemValue="3" />
+                        <td style="padding-top: 10px">
+                            <p:outputLabel value="R"/>
+                            <p:selectOneMenu id="rValue" widgetVar="rSelect" value="#{formData.r}"
+                                             onchange="c.clearRect(0,0,width,height);drawFigures(this.value);drawAllDots(this.value);">
+                                <f:selectItem itemLabel="1" itemValue="1"/>
+                                <f:selectItem itemLabel="1.5" itemValue="1.5"/>
+                                <f:selectItem itemLabel="2" itemValue="2"/>
+                                <f:selectItem itemLabel="2.5" itemValue="2.5"/>
+                                <f:selectItem itemLabel="3" itemValue="3"/>
                             </p:selectOneMenu>
+                            <p id="rErrorLine"></p>
                         </td>
-                        <td><p id="rErrorLine"> </p></td>
-
+                        <td style="padding-top: 10px">
+                            <p:growl id="growl" life="2000"/>
+                            <p:commandButton id="submitButton" value="Send" action="#{formData.updateData()}" style="height: 33px"/>
+                        </td>
                     </tr>
                 </table>
-
-
-                <p:growl id="growl" life="2000" />
-                <p:commandButton id="submitButton" value="Send" action="#{formData.updateData()}"/>
-
             </h:form>
         </div>
         <div>
             <p:dataTable var="dot" value="#{bean.getDataFromDB()}" scrollable="true" scrollHeight="370">
                 <p:column headerText="x">
-                   <h:outputText value="#{dot.x}"/>
+                    <h:outputText value="#{dot.x}"/>
                 </p:column>
                 <p:column headerText="y">
                     <h:outputText value="#{dot.y}"/>
@@ -108,7 +92,8 @@
         <h:inputHidden id="xHidden" value="#{formData.hiddenX}"> </h:inputHidden>
         <h:inputHidden id="yHidden" value="#{formData.hiddenY}"> </h:inputHidden>
         <h:inputHidden id="rHidden" value="#{formData.r}"> </h:inputHidden>
-        <h:commandButton action="#{formData.updateDataHidden()}" value="Send" id="submitButtonHidden" style="display: none"/>
+        <h:commandButton action="#{formData.updateDataHidden()}" value="Send" id="submitButtonHidden"
+                         style="display: none"/>
     </h:form>
 
     <h:form>

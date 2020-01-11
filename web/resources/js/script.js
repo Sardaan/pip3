@@ -113,7 +113,6 @@ function drawAllDots(rad){
 //при клике обновляется все страница (мб надо чтобы это был аякс клик?) еще почему то все время последнее значение пересылается в бд значения
 canvas.addEventListener("mousedown", function (event) {
     let click_x, click_y;
-    //let r = document.getElementById("form:rValue").value;
     let r = PF("rSelect").getSelectedValue();
     let rect = canvas.getBoundingClientRect();
     click_x = event.clientX - rect.left;
