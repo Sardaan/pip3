@@ -136,3 +136,7 @@ function checkArea(xVal, yVal, rVal) {
     if(xVal<=0 && yVal<=0 && yVal >= -xVal-rVal/2) return true;
     return false;
 }
+function drawCanvas(radius) {
+    drawFigures(radius);
+    drawAllDots(radius);
+}

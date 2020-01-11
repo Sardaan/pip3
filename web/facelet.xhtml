@@ -116,9 +116,8 @@
     </h:form>
 
     <script>
-        window.onload = c.clearRect(0,0,400,400);
-        drawFigures(1);
-        drawAllDots(1);
+        drawCanvas(document.getElementById("canvasForm:rHidden").value);
+        console.log(document.getElementById("canvasForm:rHidden").value)
     </script>
 </h:body>
 
