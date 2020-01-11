@@ -82,22 +82,20 @@
             </h:form>
         </div>
         <div>
-            <table id="dataTable">
-                <tr>
-                    <th>x</th>
-                    <th>y</th>
-                    <th>r</th>
-                    <th>hit</th>
-                </tr>
-                <c:forEach var="dot" items="#{bean.getDataFromDB()}">
-                    <tr>
-                        <td>#{dot.x}</td>
-                        <td>#{dot.y}</td>
-                        <td>#{dot.r}</td>
-                        <td>#{dot.hit}</td>
-                    </tr>
-                </c:forEach>
-            </table>
+            <p:dataTable var="dot" value="#{bean.getDataFromDB()}" scrollable="true" scrollHeight="370">
+                <p:column headerText="x">
+                   <h:outputText value="#{dot.x}"/>
+                </p:column>
+                <p:column headerText="y">
+                    <h:outputText value="#{dot.y}"/>
+                </p:column>
+                <p:column headerText="r">
+                    <h:outputText value="#{dot.r}"/>
+                </p:column>
+                <p:column headerText="hit">
+                    <h:outputText value="#{dot.hit}"/>
+                </p:column>
+            </p:dataTable>
         </div>
         <div id="data">
             <c:forEach var="dot" items="#{bean.getDataFromDB()}">
@@ -105,7 +103,6 @@
             </c:forEach>
         </div>
     </div>
-
     <h:form id="canvasForm">
 
         <h:inputHidden id="xHidden" value="#{formData.hiddenX}"> </h:inputHidden>
