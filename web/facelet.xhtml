@@ -36,12 +36,14 @@
                     <tr style="justify-content: center; display: flex">
                         <td style="padding-top: 10px">
                             <h:outputLabel value="X"/>
-                            <p:spinner id="xValue"  widgetVar="xValue" value="#{formData.x}" stepFactor="1" min="-5" max="5" size="1"/>
+                            <p:spinner id="xValue" widgetVar="xValue" value="#{formData.x}" stepFactor="1" min="-5"
+                                       max="5" size="1"/>
                             <p id="xErrorLine"></p>
                         </td>
                         <td style="padding-top: 10px">
                             <h:outputLabel value="Y"/>
-                            <p:inputText id="yValue" widgetVar="yValue" value="#{formData.y}" placeholder="-3 ... 5" maxlength="10"
+                            <p:inputText id="yValue" widgetVar="yValue" value="#{formData.y}" placeholder="-3 ... 5"
+                                         maxlength="10"
                                          size="2"/>
                             <p id="yErrorLine"></p>
                         </td>
@@ -59,7 +61,8 @@
                         </td>
                         <td style="padding-top: 10px">
                             <p:growl id="growl" life="2000"/>
-                            <p:commandButton id="submitButton" value="Send" action="#{formData.updateData()}" style="height: 33px"/>
+                            <p:commandButton id="submitButton" value="Send" action="#{formData.updateData()}"
+                                             style="height: 33px"/>
                         </td>
                     </tr>
                 </table>
