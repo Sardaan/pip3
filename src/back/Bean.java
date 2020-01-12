@@ -27,7 +27,7 @@ public class Bean implements Serializable {
     }
     public static Connection connect() {
         String url = "jdbc:postgresql://localhost:5432/pip3";
-        String user = "userr";
+        String user = "user";
         String password = "password";
         try {
             Class.forName("org.postgresql.Driver");
@@ -49,7 +49,8 @@ public class Bean implements Serializable {
             double y = resultSet.getDouble("y");
             double r = resultSet.getDouble("r");
             boolean hit = resultSet.getBoolean("hit");
-            data.add(new Form(x, y, r, hit));
+            double id = resultSet.getDouble("id");
+            data.add(new Form(x, y, r, hit, id));
         }
         setHistory(data);
         return data;

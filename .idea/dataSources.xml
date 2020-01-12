@@ -7,11 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://pg:5432/studs</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="pip3@localhost" uuid="651bdc14-4c76-47a9-a147-2abf7e89308d">
+    <data-source source="LOCAL" name="postgres@localhost" uuid="5f7901d5-b8ea-4781-9064-bcf33362a934">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/pip3</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
     </data-source>
   </component>
 </project>
