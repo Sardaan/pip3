@@ -106,9 +106,6 @@ function drawAllDots(r) {
     for (let i = 0; i < dots.length; i++) {
         let x = dots[i].getAttribute("data-x");
         let y = dots[i].getAttribute("data-y");
-        if (i === 1){
-            console.log(x,y,r);
-        }
         let hit = checkArea(x, y, r);
         drawDot(x * stockRadius + 200, 200 - y * stockRadius, hit);
     }
@@ -129,6 +126,7 @@ canvas.addEventListener("mousedown", function (event) {
     document.getElementById("canvasForm:xHidden").value = x.toFixed(3);
     document.getElementById("canvasForm:yHidden").value = y.toFixed(3);
     document.getElementById("canvasForm:rHidden").value = r;
+    document.getElementById("canvasForm:idHidden").value = Math.random();
     let button = document.getElementById("canvasForm:submitButtonHidden");
     button.click();
 });
