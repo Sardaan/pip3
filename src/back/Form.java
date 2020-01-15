@@ -87,7 +87,7 @@ public class Form implements Serializable {
             hit = true;
         }else hit = false;
         System.out.println(x + " " + y + " " + r);
-        PreparedStatement preparedStatement = Bean.getConnection().prepareStatement("INSERT INTO form values(?, ?, ?, ?,?)");
+        PreparedStatement preparedStatement = Bean.getConnection().prepareStatement("INSERT INTO s264424.form values(?, ?, ?, ?,?)");
         preparedStatement.setDouble(1, x);
         preparedStatement.setDouble(2, y);
         preparedStatement.setDouble(3, r);
@@ -107,7 +107,7 @@ public class Form implements Serializable {
         }
         if(!repeat){
                 System.out.println(hiddenX + " " + hiddenY + " " + r);
-                PreparedStatement preparedStatement = Bean.getConnection().prepareStatement("INSERT INTO form values(?, ?, ?, ?, ?)");
+                PreparedStatement preparedStatement = Bean.getConnection().prepareStatement("INSERT INTO s264424.form values(?, ?, ?, ?, ?)");
                 preparedStatement.setDouble(1, hiddenX);
                 preparedStatement.setDouble(2, hiddenY);
                 preparedStatement.setDouble(3, r);

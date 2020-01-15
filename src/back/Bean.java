@@ -41,7 +41,7 @@ public class Bean implements Serializable {
     }
 
     public List<Form> getDataFromDB() throws SQLException{
-        PreparedStatement preparedStatement = getConnection().prepareStatement("SELECT * FROM form");
+        PreparedStatement preparedStatement = getConnection().prepareStatement("SELECT * FROM s264424.form");
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Form> data = new ArrayList<>();
         while (resultSet.next()) {

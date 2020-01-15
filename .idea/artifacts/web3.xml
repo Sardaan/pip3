@@ -3,6 +3,11 @@
     <output-path>$PROJECT_DIR$/out/artifacts/web3</output-path>
     <root id="archive" name="web3.war">
       <element id="artifact" artifact-name="pip3:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.5" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>
