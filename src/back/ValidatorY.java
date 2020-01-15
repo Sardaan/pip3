@@ -17,13 +17,9 @@ public class ValidatorY implements Validator {
             System.out.println(1);
             throw new ValidatorException(new FacesMessage("Вы не заполнили поле Y!"));
         }
-        if(!isNumber(value.toString().replace(",","."))){
-            System.out.println(2);
-            throw new ValidatorException(new FacesMessage("В поле Y должно быть написано число!"));
-        }
         double newValue = ((Number) value).doubleValue();
         if (newValue >= 5.0 || newValue <= -3.0) {
-            System.out.println(3);
+            System.out.println(newValue);
             throw new ValidatorException(new FacesMessage("Y должно быть в диапозоне от -3.0 до 5.0"));
 
         }

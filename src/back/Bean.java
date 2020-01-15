@@ -32,7 +32,7 @@ public class Bean implements Serializable {
         try {
             Class.forName("org.postgresql.Driver");
             System.out.println("Драйвер загружен");
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(url,user, password);
             System.out.println("Connected to the database");
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,5 +55,10 @@ public class Bean implements Serializable {
         }
         setHistory(data);
         return data;
+    }
+    public void deleteData() throws SQLException{
+        if (!getConnection().createStatement().execute("DELETE from s264424.form")){
+            System.out.println("deleted");
+        }
     }
 }
